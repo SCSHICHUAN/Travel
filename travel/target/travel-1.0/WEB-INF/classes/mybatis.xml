@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.4//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+
+    <!--数据库链接配置-->
+    <!--properties 用于加载外部的文件-->
+    <properties resource="db.properties"></properties>
+
+
+     <!--分页助手-->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <property name="helpPage" value="mysql" />
+            <property name="reasonable" value="true" /><!--合理性 比如-1页就不合理-->
+        </plugin>
+    </plugins>
+
+
+    <!--environments 配置不同的数据源 现在选择的是 default -->
+    <environments default="development">
+        <environment id="development">
+            <!--transactionManager 使用的是JDBC事物管理-->
+            <transactionManager type="JDBC"/>
+            <!--使用数据库链接池-->
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--数据库字段和java实体类映射。mappers 主要用于引入映射配置文件-->
+    <mappers>
+        <!--扫描的注解的包的位置-->
+        <!--<package name="DAO"/>-->
+        <!--引入实体类和数据库字段的配置文件-->
+        <mapper resource="/mapper/userMapper.xml"></mapper>
+    </mappers>
+
+</configuration>

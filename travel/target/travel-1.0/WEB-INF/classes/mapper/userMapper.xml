@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="models.User">
+
+    <insert id="addUser">
+        insert into user(username,mail,phone,headPath) values (#{username},#{mail},#{phone},#{headPath})
+    </insert>
+    <select id="findUser" resultMap="forUsers">
+        select * from user
+    </select>
+
+
+    <resultMap id="forUsers" type="models.User">
+        <!-- 绑定id主键 -->
+        <id property="id" column="id"></id>
+    </resultMap>
+
+</mapper>
